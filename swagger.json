@@ -49,13 +49,7 @@
                     "Admin"
                 ],
                 "summary": "Create a new courses in system",
-                "parameters": [{
-                    "name": "x-auth-token",
-                    "in": "header",
-                    "required": true,
-                    "type": "string",
-                    "description": "Admin Token"
-                }],
+
                 "requestBody": {
                     "description": "courses Object",
                     "required": true,

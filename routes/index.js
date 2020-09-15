@@ -9,6 +9,8 @@ const Lecturercontroller = require('../controllers').lecturer;
 const studentEnlorController = require('../controllers').studentEnrol;
 import verifyToken from '../middleware/varifyToken';
 import { courseValidate } from '../middleware/courseValidate';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 
 // import classroomController from '../controllers/classroom';
 // import studentController from '../controllers/student';
@@ -16,9 +18,14 @@ import { courseValidate } from '../middleware/courseValidate';
 // import Lecturercontroller from '../controllers/lecturer';
 
 /* GET home page. */
-router.get("/", function(req, res, next) {
-    res.render("index", { title: "Express" });
+// router.get("/", function(req, res, next) {
+//     res.render("index", { title: "Express" });
+// });
+router.get("/", (req, res) => {
+    res.send("Welcome to course Management System");
 });
+const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 /*classroom Router*/
 router.get("/api/classrooms", classroomController.list);
 router.get("/api/classrooms/:id", classroomController.getById);
@@ -35,7 +42,8 @@ router.delete("/api/students/:id", studentController.delete);
 /*course Router*/
 router.get("/api/courses", courseController.list);
 router.get("/api/courses/:id", courseController.getById);
-router.post("/api/courses", verifyToken, courseValidate, courseController.add);
+//router.post("/api/courses", verifyToken, courseValidate, courseController.add);
+router.post("/api/courses", courseValidate, courseController.add);
 router.patch("/api/courses/:id", courseController.update);
 router.delete("/api/courses/:id", courseController.delete);
 
