@@ -1,0 +1,5 @@
+node_modules/
+postgresDB.session.sql
+package-lock.json.733700827
+package-lock.json
+.env
